@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1773299742984
+current_stage: None
+description: null
+last_updated_timestamp: 1773299742984
+name: Primary_Gesture_Classifier_SVM
+run_id: e9204b92e7da479699fe3eac183cfbac
+run_link: null
+source: file:///e:/Machine Learning 1/Hand Gesture Project/mlruns/162904957146518738/e9204b92e7da479699fe3eac183cfbac/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///e:/Machine Learning 1/Hand Gesture Project/mlruns/162904957146518738/e9204b92e7da479699fe3eac183cfbac/artifacts/model
+user_id: null
+version: 1
