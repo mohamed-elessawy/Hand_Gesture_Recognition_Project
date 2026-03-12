@@ -1,0 +1,15 @@
+artifact_uri: file:///e:/Machine Learning 1/Hand Gesture Project/mlruns/162904957146518738/ad46d74c81a8419fa549f4c602640e9e/artifacts
+end_time: 1773306047835
+entry_point_name: ''
+experiment_id: '162904957146518738'
+lifecycle_stage: active
+run_id: ad46d74c81a8419fa549f4c602640e9e
+run_name: KNN
+run_uuid: ad46d74c81a8419fa549f4c602640e9e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1773306038673
+status: 3
+tags: []
+user_id: Mohamed

@@ -2,4 +2,3 @@ ML1_env/*
 __pycache__/
 *.pyc
 *.pkl
-*.gitignore
