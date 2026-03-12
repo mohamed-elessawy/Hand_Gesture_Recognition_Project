@@ -36,3 +36,6 @@ The lightweight SVM deployment model (`deploy_svm.pkl`) is included directly in 
    ```
 
 3. **(Optional) Retrain the Model:** If you wish to explore the data pipeline or retrain the algorithms, open `Hand_Landmarks.ipynb` and execute the pipeline phases to generate a fresh model.
+
+## Live Demo Video
+[Watch the real-time inference submission video here](https://drive.google.com/file/d/1YsMbZnnWIRYgRmTTlEsJ8tisZsCCEbAw/view?usp=sharing)
