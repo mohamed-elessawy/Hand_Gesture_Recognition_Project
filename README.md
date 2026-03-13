@@ -2,8 +2,31 @@
 
 This repository contains a complete machine learning pipeline for real-time hand gesture recognition. Built utilizing MediaPipe for spatial feature extraction and Scikit-Learn for classification, the system identifies 18 distinct hand gestures through a live webcam feed. 
 
+## Project Structure
+```
+hand-gesture-recognition/
+├── 📁 data/                             # 25,000+ gesture samples
+│   └── hand_landmarks_data.csv           (63 normalized coordinates)  
+│                                          
+├── 📁 models/                           # Trained SVM model for
+│   └── deploy_svm.pkl                    production  inference
+│                                          
+├── 📁 notebooks/                         # Complete ML pipeline & analysis
+│   └── Hand_Landmarks.ipynb              
+│
+├── 📁 src/                               # Real-time webcam   
+│   └── live_inference.py                  gesture classification                 │                                          
+├── 📁 assets/
+│   ├── landmarks.png                     # Hand pose visualization
+│   └── Gestures.jpg                      # 18 gesture classes overview
+│
+├── requirements.txt                      # Python dependencies
+├── README.md                             # This file
+└── .gitignore                            # Git configuration
+```
+
 ## Project Architecture & Organization
-The core of this project is built inside `Hand_Landmarks.ipynb`. The notebook is highly organized, fully documented with markdown comments, and contains deep analytical insights. It is separated into 6 logical phases for easy reading and independent execution:
+The core of this project is built inside `notebooks/Hand_Landmarks.ipynb`. The notebook is highly organized, fully documented with markdown comments, and contains deep analytical insights. It is separated into 6 logical phases for easy reading and independent execution:
 
 * **Phase 1: Data Loading and Exploration** - Ingesting the 25,000+ sample dataset and analyzing the class distributions.
 * **Phase 2: Data Preprocessing** - Applying mathematical translation (wrist-centering) and scale-invariant normalization (scaling by hand size) to the 63 3D coordinates.
@@ -11,6 +34,13 @@ The core of this project is built inside `Hand_Landmarks.ipynb`. The notebook is
 * **Phase 4: Model Training** - Each model (SVM, Random Forest, KNN, Logistic Regression) is trained in its own isolated cell for easy testing.
 * **Phase 5: Comparing and Evaluating Models** - Evaluating the algorithms against the validation set to find the optimal mathematical fit.
 * **Phase 6: Final Evaluation & Live Video Inference** - Testing the winning model on the locked-out test data and deploying the live webcam script.
+
+## Data Overview
+The dataset contains 25,000+ real-world hand gesture samples with 21 MediaPipe landmarks (63 3D coordinates) per sample. Each gesture has been geometrically normalized to be position-invariant and scale-invariant.
+
+| Hand Landmarks | 18 Gesture Classes |
+|:---:|:---:|
+| ![Hand Landmarks](assets/landmarks.png) | ![Gesture Classes](assets/Gestures.jpg) |
 
 ## Model Evaluation & Selection
 Support Vector Machine (SVM) was selected as the deployed production model due to its superior generalization on the hold-out test set. 
@@ -23,7 +53,7 @@ Support Vector Machine (SVM) was selected as the deployed production model due t
 | Logistic Regression | 0.8875 | 0.8881 | 0.8875 | 0.8873 |
 
 ## How to Run This Project
-The lightweight SVM deployment model (`deploy_svm.pkl`) is included directly in this repository for immediate real-time inference.
+The lightweight SVM deployment model (`models/deploy_svm.pkl`) is included directly in this repository for immediate real-time inference.
 
 1. **Install Dependencies:**
    ```bash
@@ -32,10 +62,10 @@ The lightweight SVM deployment model (`deploy_svm.pkl`) is included directly in 
 
 2. **Run Live Inference:** Execute the standalone production script in your terminal to launch the webcam feed:
    ```bash
-   python live_inference.py
+   python src/live_inference.py
    ```
 
-3. **(Optional) Retrain the Model:** If you wish to explore the data pipeline or retrain the algorithms, open `Hand_Landmarks.ipynb` and execute the pipeline phases to generate a fresh model.
+3. **(Optional) Retrain the Model:** If you wish to explore the data pipeline or retrain the algorithms, open `notebooks/Hand_Landmarks.ipynb` and execute the pipeline phases to generate a fresh model.
 
 ## Live Demo Video
 [Watch the real-time inference submission video here](https://drive.google.com/file/d/1YsMbZnnWIRYgRmTTlEsJ8tisZsCCEbAw/view?usp=sharing)
