@@ -2,9 +2,51 @@
 
 This repository contains a machine learning pipeline for real-time hand gesture classification using MediaPipe and Scikit-Learn. The project handles coordinate extraction, scale-invariant normalization, model training, MLflow tracking, and live video inference.
 
+## Project Structure
+```
+hand-gesture-recognition/
+├── 📁 data/                             # 25,000+ gesture samples
+│   └── hand_landmarks_data.csv          (63 normalized coordinates)
+│
+├── 📁 models/                           # Trained SVM model for
+│   └── deploy_svm.pkl                   production inference
+│
+├── 📁 notebooks/                        # Complete ML pipeline 
+│   └── Hand_Landmarks.ipynb              & analysis
+│
+├── 📁 src/                              # Real-time webcam
+│   ├── live_inference.py                gesture classification
+│   └── mlflow_utils.py                  MLflow tracking utilities
+│
+├── 📁 assets/
+│   ├── landmarks.png                    # Hand pose visualization
+│   ├── hand_gestures.jpg                # 18 gesture classes overview
+│   └── mlflow_screenshots/              # MLflow visualizations
+│       ├── 1_runs_list.png
+│       ├── 2_comparison_chart.png
+│       ├── 3_svm_metrics.png
+│       ├── 4_confusion_matrix.png
+│       ├── 5_accuracy_f1_comparison.png
+│       ├── 5_model_registry.png
+│       └── 6_precision_recall_comparison.png
+│
+├── 📁 mlruns/                           # MLflow tracking (auto-generated)
+├── requirements.txt                     # Python dependencies
+├── README.md                            # This file
+└── .gitignore                           # Git configuration
+```
+
 ## Project Architecture
-* **Data Processing & Training:** Handled entirely within `Hand_Landmarks.ipynb`. For ease of testing and debugging, **every model (SVM, Random Forest, KNN, Logistic Regression) can be run separately on its own individual cell**.
-* **Live Inference:** Decoupled into a standalone script (`live_inference.py`) to bypass Jupyter's GUI thread limitations and ensure maximum hardware FPS during live predictions.
+* **Data Processing & Training:** Handled entirely within `notebooks/Hand_Landmarks.ipynb`. For ease of testing and debugging, **every model (SVM, Random Forest, KNN, Logistic Regression) can be run separately on its own individual cell**.
+* **Live Inference:** Decoupled into a standalone script (`src/live_inference.py`) to bypass Jupyter's GUI thread limitations and ensure maximum hardware FPS during live predictions.
+* **MLflow Experiment Tracking:** Integrated with `src/mlflow_utils.py` for comprehensive parameter, metrics, and artifact logging.
+
+## Data Overview
+The dataset contains 25,000+ real-world hand gesture samples with 21 MediaPipe landmarks (63 3D coordinates) per sample. Each gesture has been geometrically normalized to be position-invariant and scale-invariant.
+
+| Hand Landmarks | 18 Gesture Classes |
+|:---:|:---:|
+| ![Hand Landmarks](assets/landmarks.png) | ![Gesture Classes](assets/hand_gestures.jpg) |
 
 ## Dataset & Normalization
 To ensure the model is robust to distance and hand size in the live video feed, strict geometric normalization is applied to the 21 3D landmarks (63 features):
@@ -29,20 +71,20 @@ For reproducibility, each model's training loop is isolated in its own execution
 The training pipeline is fully integrated with MLflow to track parameters, metrics, artifacts (confusion matrices), and model versioning.
 
 ### Experiment Runs & Metrics
-![Runs List](mlflow_screenshots/1_runs_list.png)
-![SVM Metrics](mlflow_screenshots/3_svm_metrics.png)
+![Runs List](assets/mlflow_screenshots/1_runs_list.png)
+![SVM Metrics](assets/mlflow_screenshots/3_svm_metrics.png)
 
 ### Model Comparison
-![Comparison Chart](mlflow_screenshots/2_comparison_chart.png)
+![Comparison Chart](assets/mlflow_screenshots/2_comparison_chart.png)
 
 ### Artifacts & Model Registry
-![Confusion Matrix](mlflow_screenshots/4_confusion_matrix.png)
-![Model Registry](mlflow_screenshots/5_model_registry.png)
+![Confusion Matrix](assets/mlflow_screenshots/4_confusion_matrix.png)
+![Model Registry](assets/mlflow_screenshots/5_model_registry.png)
 
 ## Live Demo Video
 [Watch the real-time inference submission video here](https://drive.google.com/file/d/1YsMbZnnWIRYgRmTTlEsJ8tisZsCCEbAw/view?usp=sharing)
 
 ## Execution Instructions
 1. Unzip the project and activate the virtual environment.
-2. Run `Hand_Landmarks.ipynb` to process data and generate `deploy_svm.pkl`.
-3. Execute `python live_inference.py` in the terminal to launch the real-time classification feed.
+2. Run `notebooks/Hand_Landmarks.ipynb` to process data and generate `models/deploy_svm.pkl`.
+3. Execute `python src/live_inference.py` in the terminal to launch the real-time classification feed.
